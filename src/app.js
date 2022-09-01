@@ -11,6 +11,8 @@ const categories = [
 
 const app = express();
 
+app.use(express.json());
+
 app.get("/api/categories", (request, response) => {
   response.send(categories);
 });
@@ -24,7 +26,13 @@ app.get("/api/categories/:id", (request, response) => {
   //   });
 
   const category = categories.find((category) => category.id === parseInt(id));
+
   response.send(category);
+});
+
+app.post("/api/categories", (request, response) => {
+  categories.push(request.body);
+  response.send("Catégorie créée avec succès");
 });
 
 const PORT = 3000;
