@@ -48,7 +48,7 @@ app.put("/api/categories/:id", (request, response) => {
     return response.sendStatus(404);
   }
   Object.assign(category, request.body);
-  response.send("Catégorie mis à jour ave c succès");
+  response.send("Catégorie mis à jour avec succès");
 });
 
 const PORT = 3000;
