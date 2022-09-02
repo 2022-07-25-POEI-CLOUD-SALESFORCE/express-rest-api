@@ -31,6 +31,9 @@ app.delete("/api/categories/:id", (request, response) => {
   const id = parseInt(request.params.id);
   const category = categories.find((category) => category.id === parseInt(id));
   const categoryIndex = categories.indexOf(category);
+  if (categoryIndex === -1) {
+    return response.send("Rien à supprimer");
+  }
   categories.splice(categoryIndex, 1);
   response.send("Supprimé avec succès");
 });
