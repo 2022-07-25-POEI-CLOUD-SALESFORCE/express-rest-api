@@ -1,6 +1,4 @@
 const express = require("express");
-const res = require("express/lib/response");
-const { indexOf } = require("lodash");
 
 // Catégories :  /api/categories
 // Produits : /api/products
@@ -32,7 +30,8 @@ app.post("/api/categories", (request, response) => {
 app.delete("/api/categories/:id", (request, response) => {
   const id = parseInt(request.params.id);
   const category = categories.find((category) => category.id === parseInt(id));
-  categories.splice(indexOf(category), 1);
+  const categoryIndex = categories.indexOf(category);
+  categories.splice(categoryIndex, 1);
   response.send("Supprimé avec succès");
 });
 
@@ -40,7 +39,7 @@ app.put("/api/categories/:id", (request, response) => {
   const id = parseInt(request.params.id);
   const category = categories.find((category) => category.id === id);
   Object.assign(category, request.body);
-  response.send("Catégorie mis à jour avec succès");
+  response.send("Catégorie mis à jour ave c succès");
 });
 
 const PORT = 3000;
