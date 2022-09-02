@@ -19,6 +19,9 @@ app.get("/api/categories", (request, response) => {
 app.get("/api/categories/:id", (request, response) => {
   const id = parseInt(request.params.id);
   const category = categories.find((category) => category.id === parseInt(id));
+  if (!category) {
+    return response.sendStatus(404);
+  }
   response.send(category);
 });
 
@@ -30,6 +33,9 @@ app.post("/api/categories", (request, response) => {
 app.delete("/api/categories/:id", (request, response) => {
   const id = parseInt(request.params.id);
   const category = categories.find((category) => category.id === parseInt(id));
+  if (!category) {
+    return response.sendStatus(404);
+  }
   const categoryIndex = categories.indexOf(category);
   categories.splice(categoryIndex, 1);
   response.send("Supprimé avec succès");
@@ -37,7 +43,10 @@ app.delete("/api/categories/:id", (request, response) => {
 
 app.put("/api/categories/:id", (request, response) => {
   const id = parseInt(request.params.id);
-  const category = categories.find((category) => category.id === id);
+  const category = categories.find((category) => category.id === parseInt(id));
+  if (!category) {
+    return response.sendStatus(404);
+  }
   Object.assign(category, request.body);
   response.send("Catégorie mis à jour ave c succès");
 });
