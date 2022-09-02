@@ -35,6 +35,24 @@ app.post("/api/categories", (request, response) => {
   response.send("Catégorie créée avec succès");
 });
 
+app.delete("/api/categories/:id", (request, response) => {
+  const id = parseInt(request.params.id);
+  const index = categories.findIndex((category) => category.id === id);
+  categories.splice(index, 1);
+  response.send("Supprimé avec succès");
+});
+
+// Mis à jour
+// {nom:"Toto"}
+// /api/categories/1 , {nom:"Toto"}
+app.put("/api/categories/:id", (request, response) => {
+  const id = parseInt(request.params.id);
+  const category = categories.find((category) => category.id === id);
+  category.nom = request.body.name;
+  Object.assign(category, request.body);
+  response.send("Catégorie mis à jour avec succès");
+});
+
 const PORT = 3000;
 
 app.listen(PORT, () => {
