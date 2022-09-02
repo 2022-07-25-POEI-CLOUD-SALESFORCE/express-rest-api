@@ -11,9 +11,16 @@ const categories = [
 const app = express();
 
 app.use(express.json());
+app.use(logger);
+
+function logger(request, _, next) {
+  console.log(
+    `# ${request.method}  ${request.url} Data ${JSON.stringify(request?.body)}`
+  );
+  next();
+}
 
 function validateCategory(request, response, next) {
-  console.log("Je suis le middleware");
   const id = parseInt(request.params.id);
   const category = categories.find((category) => category.id === parseInt(id));
   if (!category) {
@@ -23,7 +30,7 @@ function validateCategory(request, response, next) {
   next();
 }
 
-app.get("/api/categories", (request, response) => {
+app.get("/api/categories", (_, response) => {
   response.send(categories);
 });
 
@@ -36,14 +43,14 @@ app.post("/api/categories", (request, response) => {
   response.send("Catégorie créée avec succès");
 });
 
-app.delete("/api/categories/:id", (request, response) => {
-  const categoryIndex = categories.indexOf(category);
+app.delete("/api/categories/:id", validateCategory, (request, response) => {
+  const categoryIndex = categories.indexOf(request.category);
   categories.splice(categoryIndex, 1);
   response.send("Supprimé avec succès");
 });
 
-app.put("/api/categories/:id", (request, response) => {
-  Object.assign(category, request.body);
+app.put("/api/categories/:id", validateCategory, (request, response) => {
+  Object.assign(request.category, request.body);
   response.send("Catégorie mis à jour avec succès");
 });
 
@@ -52,3 +59,35 @@ const PORT = 3000;
 app.listen(PORT, () => {
   console.log(`Server run on port ${PORT}`);
 });
+
+// # 1. Mettre à jour la route PUT /api/categories/:id
+// # 2. Mettre à jour la route DELETE /api/categories/:id
+// # 3. Créer un middleware de Logging
+//      # POST /api/categories , BODY {}
+
+// #1. Ajouter un champs description dans les catégories
+// #2. Ajouter une logique de validation pour la création et mis à jour des categories
+// #3. Si le nom est vide, écrire : "Le nom ne peut pas être vide"
+// #4. Si la description est vide, écrire : "La description ne peut pas être vide"
+// #5. En cas d'erreur, renvoyer un objet d'erreur
+//    exemple :
+// Si seul le nom est vide, renvoyer
+// {
+//   errors: {
+//     nom: "Le nom ne peut pas être vide",
+//   }
+// }
+// Si seul la description est vide, renvoyer
+// {
+//   errors: {
+//     description: "La description ne peut pas être vide",
+//   }
+// }
+
+// Si les 2 sont vides:
+// {
+//   errors: {
+//     nom: "Le nom ne peut pas être vide",
+//     description: "La description ne peut pas être vide",
+//   }
+// }
