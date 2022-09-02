@@ -1,5 +1,6 @@
 const express = require("express");
 const res = require("express/lib/response");
+const { indexOf } = require("lodash");
 
 // Catégories :  /api/categories
 // Produits : /api/products
@@ -18,15 +19,8 @@ app.get("/api/categories", (request, response) => {
 });
 
 app.get("/api/categories/:id", (request, response) => {
-  //   response.send(request.params.id);
   const id = parseInt(request.params.id);
-
-  //   const category = categories.find(function (category) {
-  //     return category.id === parseInt(id);
-  //   });
-
   const category = categories.find((category) => category.id === parseInt(id));
-
   response.send(category);
 });
 
@@ -37,18 +31,14 @@ app.post("/api/categories", (request, response) => {
 
 app.delete("/api/categories/:id", (request, response) => {
   const id = parseInt(request.params.id);
-  const index = categories.findIndex((category) => category.id === id);
-  categories.splice(index, 1);
+  const category = categories.find((category) => category.id === parseInt(id));
+  categories.splice(indexOf(category), 1);
   response.send("Supprimé avec succès");
 });
 
-// Mis à jour
-// {nom:"Toto"}
-// /api/categories/1 , {nom:"Toto"}
 app.put("/api/categories/:id", (request, response) => {
   const id = parseInt(request.params.id);
   const category = categories.find((category) => category.id === id);
-  category.nom = request.body.name;
   Object.assign(category, request.body);
   response.send("Catégorie mis à jour avec succès");
 });
@@ -58,5 +48,3 @@ const PORT = 3000;
 app.listen(PORT, () => {
   console.log(`Server run on port ${PORT}`);
 });
-
-//CRUD (Create Read Update Delete)
