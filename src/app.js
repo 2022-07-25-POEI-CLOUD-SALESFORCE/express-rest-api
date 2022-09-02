@@ -12,17 +12,23 @@ const app = express();
 
 app.use(express.json());
 
-app.get("/api/categories", (request, response) => {
-  response.send(categories);
-});
-
-app.get("/api/categories/:id", (request, response) => {
+function validateCategory(request, response, next) {
+  console.log("Je suis le middleware");
   const id = parseInt(request.params.id);
   const category = categories.find((category) => category.id === parseInt(id));
   if (!category) {
     return response.sendStatus(404);
   }
-  response.send(category);
+  request.category = category;
+  next();
+}
+
+app.get("/api/categories", (request, response) => {
+  response.send(categories);
+});
+
+app.get("/api/categories/:id", validateCategory, (request, response) => {
+  response.send(request.category);
 });
 
 app.post("/api/categories", (request, response) => {
@@ -31,22 +37,12 @@ app.post("/api/categories", (request, response) => {
 });
 
 app.delete("/api/categories/:id", (request, response) => {
-  const id = parseInt(request.params.id);
-  const category = categories.find((category) => category.id === parseInt(id));
-  if (!category) {
-    return response.sendStatus(404);
-  }
   const categoryIndex = categories.indexOf(category);
   categories.splice(categoryIndex, 1);
   response.send("Supprimé avec succès");
 });
 
 app.put("/api/categories/:id", (request, response) => {
-  const id = parseInt(request.params.id);
-  const category = categories.find((category) => category.id === parseInt(id));
-  if (!category) {
-    return response.sendStatus(404);
-  }
   Object.assign(category, request.body);
   response.send("Catégorie mis à jour avec succès");
 });
