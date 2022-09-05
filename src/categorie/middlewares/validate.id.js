@@ -1,6 +1,6 @@
 const { categories } = require("../../categories");
 
-function checkExistence(request, response, next) {
+function validateId(request, response, next) {
   const id = parseInt(request.params.id);
   const category = categories.find((category) => category.id === parseInt(id));
   if (!category) {
@@ -10,4 +10,4 @@ function checkExistence(request, response, next) {
   next();
 }
 
-module.exports.checkExistence = checkExistence;
+module.exports.validateId = validateId;
