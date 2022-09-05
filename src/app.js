@@ -45,15 +45,15 @@ function validateCategory(request, response, next) {
 function validateBody(request, response, next) {
   const body = request.body;
   const validator = { errors: {}, isValid: true };
-  if (!body.name) {
-    validator.errors.name = "name cannot be empty";
+  if (!body.nom) {
+    validator.errors.nom = "le nom ne peut pas être vide";
   }
 
   if (!body.description) {
-    validator.errors.description = "description cannot be empty";
+    validator.errors.description = "la description ne peut pas être vide";
   }
 
-  if (validator.errors.name || validator.errors.description) {
+  if (validator.errors.nom || validator.errors.description) {
     validator.isValid = false;
   }
 
