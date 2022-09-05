@@ -1,4 +1,7 @@
-class Category {
+const { categories } = require("../categories");
+const { generateRandomIndex } = require("../utils/generate-random-index");
+
+class CategorieController {
   findAll(_, response) {
     response.send(categories);
   }
