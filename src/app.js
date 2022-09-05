@@ -74,6 +74,16 @@ app.get("/api/categories/:id", validateCategory, (request, response) => {
 
 app.post("/api/categories", [validateBody], (request, response) => {
   const id = generateRandomIndex();
+  const category = categories.find(
+    (category) => category.nom === request.body.nom
+  );
+  if (category) {
+    return response
+      .status(400)
+      .send(
+        `Vous ne pouvez pas avoir 2 catégories avec le nom ${request.body.nom}`
+      );
+  }
   categories.push({ id, ...request.body });
   response.send("Catégorie créée avec succès");
 });
@@ -88,6 +98,16 @@ app.put(
   "/api/categories/:id",
   [validateCategory, validateBody],
   (request, response) => {
+    const category = categories.find(
+      (category) => category.nom === request.body.nom
+    );
+    if (category && category.id !== parseInt(request.params.id)) {
+      return response
+        .status(400)
+        .send(
+          `Vous ne pouvez pas avoir 2 catégories avec le nom ${request.body.nom}`
+        );
+    }
     Object.assign(request.category, request.body);
     response.send("Catégorie mis à jour avec succès");
   }
