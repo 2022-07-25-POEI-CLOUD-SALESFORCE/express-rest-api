@@ -71,13 +71,14 @@ app.listen(PORT, () => {
 // #4. Si la description est vide, écrire : "La description ne peut pas être vide"
 // #5. En cas d'erreur, renvoyer un objet d'erreur
 //    exemple :
-// Si seul le nom est vide, renvoyer
+// Si seul le nom est vide, renvoyer : body :{description:"effwfewf"}
 // {
 //   errors: {
 //     nom: "Le nom ne peut pas être vide",
 //   }
 // }
-// Si seul la description est vide, renvoyer
+
+// Si seul la description est vide, renvoyer  : body {nom:"sdffdsf"}
 // {
 //   errors: {
 //     description: "La description ne peut pas être vide",
@@ -91,3 +92,6 @@ app.listen(PORT, () => {
 //     description: "La description ne peut pas être vide",
 //   }
 // }
+
+// Ne pas envoyer un id.
+// L'id est généré à partir d'un nombre aléatoire entre 1 et 999(Math.random)
