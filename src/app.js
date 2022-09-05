@@ -4,8 +4,16 @@ const express = require("express");
 // Produits : /api/products
 
 const categories = [
-  { id: 1, nom: "Jeux vidéos" },
-  { id: 2, nom: "Ordinateurs" },
+  {
+    id: 1,
+    nom: "Jeux vidéos",
+    description: "C'est pour ceux qui adorent chirer",
+  },
+  {
+    id: 2,
+    nom: "Ordinateurs",
+    description: "Ceci inclut les laptop & ordinateurs de bureau",
+  },
 ];
 
 const app = express();
@@ -20,6 +28,10 @@ function logger(request, _, next) {
   next();
 }
 
+function generateRandomIndex() {
+  return Math.floor(Math.random() * 999) + 1;
+}
+
 function validateCategory(request, response, next) {
   const id = parseInt(request.params.id);
   const category = categories.find((category) => category.id === parseInt(id));
@@ -27,6 +39,28 @@ function validateCategory(request, response, next) {
     return response.sendStatus(404);
   }
   request.category = category;
+  next();
+}
+
+function validateBody(request, response, next) {
+  const body = request.body;
+  const validator = { errors: {}, isValid: true };
+  if (!body.name) {
+    validator.errors.name = "name cannot be empty";
+  }
+
+  if (!body.description) {
+    validator.errors.description = "description cannot be empty";
+  }
+
+  if (validator.errors.name || validator.errors.description) {
+    validator.isValid = false;
+  }
+
+  if (!validator.isValid) {
+    return response.status(422).send(validator);
+  }
+
   next();
 }
 
@@ -38,8 +72,9 @@ app.get("/api/categories/:id", validateCategory, (request, response) => {
   response.send(request.category);
 });
 
-app.post("/api/categories", (request, response) => {
-  categories.push(request.body);
+app.post("/api/categories", [validateBody], (request, response) => {
+  const id = generateRandomIndex();
+  categories.push({ id, ...request.body });
   response.send("Catégorie créée avec succès");
 });
 
@@ -49,10 +84,14 @@ app.delete("/api/categories/:id", validateCategory, (request, response) => {
   response.send("Supprimé avec succès");
 });
 
-app.put("/api/categories/:id", validateCategory, (request, response) => {
-  Object.assign(request.category, request.body);
-  response.send("Catégorie mis à jour avec succès");
-});
+app.put(
+  "/api/categories/:id",
+  [validateCategory, validateBody],
+  (request, response) => {
+    Object.assign(request.category, request.body);
+    response.send("Catégorie mis à jour avec succès");
+  }
+);
 
 const PORT = 3000;
 
