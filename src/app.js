@@ -64,53 +64,18 @@ function validateBody(request, response, next) {
   next();
 }
 
-app.get("/api/categories", (_, response) => {
-  response.send(categories);
-});
-
 app.get("/api/categories/:id", validateCategory, (request, response) => {
   response.send(request.category);
 });
 
-app.post("/api/categories", [validateBody], (request, response) => {
-  const id = generateRandomIndex();
-  const category = categories.find(
-    (category) => category.nom === request.body.nom
-  );
-  if (category) {
-    return response
-      .status(400)
-      .send(
-        `Vous ne pouvez pas avoir 2 catégories avec le nom ${request.body.nom}`
-      );
-  }
-  categories.push({ id, ...request.body });
-  response.send("Catégorie créée avec succès");
-});
+app.post("/api/categories", [validateBody], (request, response) => {});
 
-app.delete("/api/categories/:id", validateCategory, (request, response) => {
-  const categoryIndex = categories.indexOf(request.category);
-  categories.splice(categoryIndex, 1);
-  response.send("Supprimé avec succès");
-});
+app.delete("/api/categories/:id", validateCategory, (request, response) => {});
 
 app.put(
   "/api/categories/:id",
   [validateCategory, validateBody],
-  (request, response) => {
-    const category = categories.find(
-      (category) => category.nom === request.body.nom
-    );
-    if (category && category.id !== parseInt(request.params.id)) {
-      return response
-        .status(400)
-        .send(
-          `Vous ne pouvez pas avoir 2 catégories avec le nom ${request.body.nom}`
-        );
-    }
-    Object.assign(request.category, request.body);
-    response.send("Catégorie mis à jour avec succès");
-  }
+  (request, response) => {}
 );
 
 const PORT = 3000;
