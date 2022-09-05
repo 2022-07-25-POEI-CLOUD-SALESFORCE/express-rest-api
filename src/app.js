@@ -43,13 +43,17 @@ function validateCategory(request, response, next) {
 }
 
 function validateBody(request, response, next) {
-  const body = request.body;
-  const validator = { errors: {}, isValid: true };
-  if (!body.nom) {
+  // V1
+  const validator = {
+    errors: {},
+    isValid: true,
+  };
+
+  if (!request.body.nom) {
     validator.errors.nom = "le nom ne peut pas être vide";
   }
 
-  if (!body.description) {
+  if (!request.body.description) {
     validator.errors.description = "la description ne peut pas être vide";
   }
 
@@ -57,7 +61,40 @@ function validateBody(request, response, next) {
     validator.isValid = false;
   }
 
+  // V2
+  // const fields = ["nom", "description"];
+
+  // const request = {
+  //   body: {
+  //     nom: "sdfjdsklfdsk",
+  //     description: "dsfjdsfjdslkfdj",
+  //   },
+  // };
+
+  // const validator = {
+  //   errors: {},
+  //   isValid: true,
+  // };
+
+  // for (let field of fields) {
+  //   //nom
+  //   if (!request.body[field]) {
+  //     //if(!request.body["description"])
+  //     validator.errors[field] = `${field} ne peut pas être vide`;
+  //   }
+  // }
+
+  // for (let field of fields) {
+  //   //nom
+  //   if (!request.body[field]) {
+  //     //!request.body["nom"]
+  //     validator.isValid = false;
+  //     break;
+  //   }
+  // }
+
   if (!validator.isValid) {
+    // return response.sendStatus(422);
     return response.status(422).send(validator);
   }
 
