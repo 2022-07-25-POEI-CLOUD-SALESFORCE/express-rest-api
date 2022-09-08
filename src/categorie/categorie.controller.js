@@ -1,51 +1,31 @@
-const { categories } = require("../categories");
-const { generateRandomIndex } = require("../utils/generate-random-index");
+const CategorieService = require("./categorie.service");
 
 class CategorieController {
-  findAll(_, response) {
-    response.send(categories);
+  constructor() {
+    this.categorieService = new CategorieService();
   }
 
-  findOne(request, response) {
-    response.send(request.category);
-  }
+  findAll = async (_, response) => {
+    const categories = await this.categorieService.findAll();
+    return response.send(categories);
+  };
 
-  delete(request, response) {
-    const categoryIndex = categories.indexOf(request.category);
-    categories.splice(categoryIndex, 1);
-    response.send("Supprimé avec succès");
-  }
-
-  create(request, response) {
-    const id = generateRandomIndex();
-    const category = categories.find(
-      (category) => category.nom === request.body.nom
-    );
-    if (category) {
-      return response
-        .status(400)
-        .send(
-          `Vous ne pouvez pas avoir 2 catégories avec le nom ${request.body.nom}`
-        );
+  findOne = async (request, response) => {
+    try {
+      const id = request.params.id;
+      const category = await this.categorieService.findOne(id);
+      response.send(category);
+    } catch (err) {
+      console.log("Erreur : ", err.message);
+      response.status(404).send(err.message);
     }
-    categories.push({ id, ...request.body });
-    response.send("Catégorie créée avec succès");
-  }
+  };
 
-  update(request, response) {
-    const category = categories.find(
-      (category) => category.nom === request.body.nom
-    );
-    if (category && category.id !== parseInt(request.params.id)) {
-      return response
-        .status(400)
-        .send(
-          `Vous ne pouvez pas avoir 2 catégories avec le nom ${request.body.nom}`
-        );
-    }
-    Object.assign(request.category, request.body);
-    response.send("Catégorie mis à jour avec succès");
-  }
+  delete = async (request, response) => {};
+
+  create = async (request, response) => {};
+
+  update = async (request, response) => {};
 }
 
 module.exports.CategorieController = CategorieController;
