@@ -21,11 +21,37 @@ class CategorieController {
     }
   };
 
-  delete = async (request, response) => {};
+  delete = async (request, response) => {
+    try {
+      const id = request.params.id;
+      await this.categorieService.deleteOne(id);
+      response.send("Catégorie supprimé avec succès");
+    } catch (err) {
+      console.log("Erreur : ", err.message);
+      response.status(404).send(err.message);
+    }
+  };
 
-  create = async (request, response) => {};
+  create = async (request, response) => {
+    try {
+      await this.categorieService.createOne(request.body);
+      response.status(201).send("Catégorie créée avec succès");
+    } catch (err) {
+      response.sendStatus(500);
+      console.log(err);
+    }
+  };
 
-  update = async (request, response) => {};
+  update = async (request, response) => {
+    try {
+      const id = request.params.id;
+      await this.categorieService.updateOne(id, request.body);
+      response.send("Catégorie mis à jour avec succès");
+    } catch (err) {
+      console.log("Erreur : ", err.message);
+      response.status(404).send(err.message);
+    }
+  };
 }
 
 module.exports.CategorieController = CategorieController;
