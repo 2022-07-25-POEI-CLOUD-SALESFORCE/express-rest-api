@@ -1,1 +1,7 @@
-{"2":{"id":2,"nom":"Ordinateurs","description":"Ceci inclut les laptop & ordinateurs de bureau"},"446":{"id":446,"nom":"Jouets","description":"Truc pour gosses"}}
+{
+  "104": { "id": 104, "name": "laptop & computers" },
+  "318": { "id": 318, "name": "Shoes & Sneakers" },
+  "488": { "id": 488, "name": "clothing" },
+  "822": { "id": 822, "name": "books" },
+  "838": { "id": 838, "name": "video games" }
+}

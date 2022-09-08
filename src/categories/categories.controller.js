@@ -1,20 +1,20 @@
-const CategorieService = require("./categorie.service");
+const CategoriesService = require("./categories.service");
 
-class CategorieController {
+class CategoriesController {
   constructor() {
-    this.categorieService = new CategorieService();
+    this.categoriesService = new CategoriesService();
   }
 
   findAll = async (_, response) => {
-    const categories = await this.categorieService.findAll();
+    const categories = await this.categoriesService.findAll();
     return response.send(categories);
   };
 
   findOne = async (request, response) => {
     try {
       const id = request.params.id;
-      const category = await this.categorieService.findOne(id);
-      response.send(category);
+      const categories = await this.categoriesService.findOne(id);
+      response.send(categories);
     } catch (err) {
       console.log("Erreur : ", err.message);
       response.status(404).send(err.message);
@@ -24,7 +24,7 @@ class CategorieController {
   delete = async (request, response) => {
     try {
       const id = request.params.id;
-      await this.categorieService.deleteOne(id);
+      await this.categoriesService.deleteOne(id);
       response.send("Catégorie supprimé avec succès");
     } catch (err) {
       console.log("Erreur : ", err.message);
@@ -34,7 +34,7 @@ class CategorieController {
 
   create = async (request, response) => {
     try {
-      await this.categorieService.createOne(request.body);
+      await this.categoriesService.createOne(request.body);
       response.status(201).send("Catégorie créée avec succès");
     } catch (err) {
       response.sendStatus(500);
@@ -45,7 +45,7 @@ class CategorieController {
   update = async (request, response) => {
     try {
       const id = request.params.id;
-      await this.categorieService.updateOne(id, request.body);
+      await this.categoriesService.updateOne(id, request.body);
       response.send("Catégorie mis à jour avec succès");
     } catch (err) {
       console.log("Erreur : ", err.message);
@@ -54,4 +54,4 @@ class CategorieController {
   };
 }
 
-module.exports.CategorieController = CategorieController;
+module.exports.CategoriesController = CategoriesController;

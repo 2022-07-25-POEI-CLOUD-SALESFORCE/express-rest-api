@@ -1,7 +1,7 @@
 const fs = require("fs/promises");
 const { generateRandomIndex } = require("../utils/generate-random-index");
 
-class CategorieRepository {
+class CategoriesRepository {
   async findAll() {
     const categories = JSON.parse(
       await fs.readFile("./categories.json", "utf8")
@@ -15,19 +15,20 @@ class CategorieRepository {
     return categories[id];
   }
 
-  async createOne(categoryObj) {
+  async createOne(categoriesObj) {
     const categories = JSON.parse(
       await fs.readFile("./categories.json", "utf8")
     );
     const id = generateRandomIndex();
-    categories[id] = { id, ...categoryObj };
+    categoriesObj.id = id;
+    categories[id] = categoriesObj;
     await fs.writeFile("./categories.json", JSON.stringify(categories));
   }
-  async updateOne(id, categoryObj) {
+  async updateOne(id, categoriesObj) {
     const categories = JSON.parse(
       await fs.readFile("./categories.json", "utf8")
     );
-    categories[id] = categoryObj;
+    categories[id] = { id, ...categoriesObj };
     await fs.writeFile("./categories.json", JSON.stringify(categories));
   }
   async deleteOne(id) {
@@ -39,4 +40,4 @@ class CategorieRepository {
   }
 }
 
-module.exports = CategorieRepository;
+module.exports = CategoriesRepository;

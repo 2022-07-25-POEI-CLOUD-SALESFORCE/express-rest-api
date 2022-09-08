@@ -1,15 +1,15 @@
 function validateBody(request, response, next) {
   const body = request.body;
   const validator = { errors: {}, isValid: true };
-  if (!body.nom) {
-    validator.errors.nom = "le nom ne peut pas être vide";
+  if (!body.name) {
+    validator.errors.name = "le name ne peut pas être vide";
   }
 
   if (!body.description) {
     validator.errors.description = "la description ne peut pas être vide";
   }
 
-  if (validator.errors.nom || validator.errors.description) {
+  if (validator.errors.name || validator.errors.description) {
     validator.isValid = false;
   }
 

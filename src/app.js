@@ -1,6 +1,7 @@
 const express = require("express");
 const cors = require("cors");
-const categorieRouter = require("./categorie/categorie.router");
+const categoriesRouter = require("./categories/categories.router");
+const productsRouter = require("./products/products.router");
 const { logger } = require("./middlewares/logger");
 
 const app = express();
@@ -27,7 +28,8 @@ app.use(cors());
 //   })
 // );
 
-app.use("/api/categories", categorieRouter);
+app.use("/api/categories", categoriesRouter);
+app.use("/api/products", productsRouter);
 const PORT = 3000;
 
 app.listen(PORT, () => {

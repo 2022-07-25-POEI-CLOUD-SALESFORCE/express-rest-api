@@ -1,0 +1,82 @@
+{
+  "170": {
+    "id": 170,
+    "name": "TUF Gaming Laptop RTX 3060",
+    "manufacturer": "Asus",
+    "categoryId": 104,
+    "imageUrl": "https://shop.roensystems.co.ke/wp-content/uploads/2020/11/1.png",
+    "price": 1800,
+    "stockQuantity": 134,
+    "description": "Avec son carte dédiée GTX 3060 Ti, il peut faire des miracles"
+  },
+  "209": {
+    "id": 209,
+    "name": "The secret of the Javascript Ninja",
+    "manufacturer": "John Resig",
+    "categoryId": 822,
+    "imageUrl": "https://d28hgpri8am2if.cloudfront.net/book_images/onix/cvr9781638353577/secrets-of-the-javascript-ninja-9781638353577_hr.jpg",
+    "price": 45,
+    "stockQuantity": 400,
+    "description": "This book is for those who want to become really good at Javascript"
+  },
+  "235": {
+    "id": 235,
+    "name": "Playstation 5",
+    "manufacturer": "Sony",
+    "categoryId": 838,
+    "imageUrl": "https://images.unsplash.com/photo-1605296830714-7c02e14957ac?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1287&q=80",
+    "price": 550,
+    "stockQuantity": 2,
+    "description": "The PS5 console unleashes new gaming possibilities that you never anticipated. Experience lightning fast loading with an ultra-high speed SSD, deeper immersion with support for haptic feedback, adaptive triggers, and 3D Audio, and an all-new generation of incredible PlayStation games."
+  },
+  "358": {
+    "id": 358,
+    "name": "Xbox Series X",
+    "manufacturer": "Microsoft",
+    "categoryId": 838,
+    "imageUrl": "https://m.media-amazon.com/images/I/61vkgDi7wHL._SL1500_.jpg",
+    "price": 450,
+    "stockQuantity": 50,
+    "description": "Introducing Xbox Series X, the fastest, most powerful Xbox ever. Play thousands of titles from four Generations of Consoles - all games look and play best on Xbox Series X. At the heart of Series X is the Xbox Velocity architecture, which pairs a custom SSD with integrated software for faster, streamlined gameplay with significantly reduced load times. Seamlessly move between multiple games in a Flash with quick resume. Explore rich new worlds and enjoy the action like never before with the unmatched 12 Teraflops of raw graphic processing power. Enjoy 4K gaming at up to 120 frames per second, advanced 3D spatial sound, and more. Get started with an instant library of 100+ high-quality games, including all new Xbox Game Studios titles the day they launch like Halo Infinite, with Xbox Game Pass ultimate (membership sold separately). If you purchased Xbox All Access at Amazon, please visit the Xbox website directly for steps on how to upgrade at a participating Xbox All Access retailer. Amazon is not an Xbox All Access participating retailer for Xbox Series X|S. For financing related questions, contact Citizens One.."
+  },
+  "561": {
+    "id": 561,
+    "name": "Jeans",
+    "manufacturer": "Levis Strauss",
+    "categoryId": 488,
+    "imageUrl": "https://www.etonline.com/sites/default/files/images/2021-02/signature_by_levi_strauss_co._gold_label_womens_totally_shaping_pull-on_skinny_jeans.jpg",
+    "price": 78,
+    "stockQuantity": 2987,
+    "description": "Nice Jeans."
+  },
+  "701": {
+    "id": 701,
+    "name": "Lite Racer",
+    "manufacturer": "Addidas",
+    "categoryId": 318,
+    "imageUrl": "https://assets.adidas.com/images/w_600,f_auto,q_auto/ca24fcd6f82c434890f0ad4400fe48f2_9366/Lite_Racer_3.0_Shoes_White_GW7955_01_standard.jpg",
+    "price": 66,
+    "stockQuantity": 45,
+    "description": "Good for running."
+  },
+  "916": {
+    "id": 916,
+    "name": "Clean Code",
+    "manufacturer": "Martin Cecil Roberts",
+    "categoryId": 822,
+    "imageUrl": "https://kbimages1-a.akamaihd.net/2114ab23-78f2-4efb-b0e1-7c03f82da843/1200/1200/False/clean-code.jpg",
+    "price": 56,
+    "stockQuantity": 309,
+    "description": "For you to become a better programmer, this book is the only way."
+  },
+  "926": {
+    "id": 926,
+    "name": "Macbook Pro 16 M1 Max",
+    "manufacturer": "Apple",
+    "categoryId": 104,
+    "imageUrl": "https://images.unsplash.com/photo-1635310568932-47fd9c961c26?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2670&q=80",
+    "price": 3500,
+    "stockQuantity": 500,
+    "description": "Ce laptop est extraordinaire"
+  }
+}
