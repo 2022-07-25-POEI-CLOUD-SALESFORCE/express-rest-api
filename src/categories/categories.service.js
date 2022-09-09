@@ -1,8 +1,10 @@
+const ProductsService = require("../products/products.service");
 const CategoriesRepository = require("./categories.repository");
 
 class CategoriesService {
   constructor() {
     this.categoriesRepository = new CategoriesRepository();
+    this.productsService = new ProductsService();
   }
 
   findAll() {
@@ -27,6 +29,18 @@ class CategoriesService {
     const categories = await this.categoriesRepository.findOne(id);
     if (!categories) throw new Error(`Cannot find categories with id ${id}`);
     return this.categoriesRepository.deleteOne(id);
+  }
+
+  async findProducts(id) {
+    await this.findOne(id);
+    const products = await this.productsService.findAll();
+    const productsByCategory = [];
+    for (let attr in products) {
+      if (products[attr].categoryId === parseInt(id)) {
+        productsByCategory.push(products[attr]);
+      }
+    }
+    return productsByCategory;
   }
 }
 

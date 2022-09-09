@@ -15,4 +15,6 @@ categoriesRouter.delete("/:id", categoriesController.delete);
 
 categoriesRouter.put("/:id", validateBody, categoriesController.update);
 
+categoriesRouter.get("/:id/products", categoriesController.findProducts);
+
 module.exports = categoriesRouter;

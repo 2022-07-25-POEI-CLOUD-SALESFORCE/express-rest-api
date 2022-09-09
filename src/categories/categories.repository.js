@@ -14,7 +14,7 @@ class CategoriesRepository {
     );
     return categories[id];
   }
-
+  //{ name:"esfsdjfkdsjf",description:"adfjdslfsjklsdjfds"}
   async createOne(categoriesObj) {
     const categories = JSON.parse(
       await fs.readFile("./categories.json", "utf8")

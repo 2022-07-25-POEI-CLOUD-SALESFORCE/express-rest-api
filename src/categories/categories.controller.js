@@ -1,3 +1,4 @@
+const { response } = require("express");
 const CategoriesService = require("./categories.service");
 
 class CategoriesController {
@@ -47,6 +48,17 @@ class CategoriesController {
       const id = request.params.id;
       await this.categoriesService.updateOne(id, request.body);
       response.send("Catégorie mis à jour avec succès");
+    } catch (err) {
+      console.log("Erreur : ", err.message);
+      response.status(404).send(err.message);
+    }
+  };
+
+  findProducts = async (request, response) => {
+    try {
+      const id = request.params.id;
+      const products = await this.categoriesService.findProducts(id);
+      response.send(products);
     } catch (err) {
       console.log("Erreur : ", err.message);
       response.status(404).send(err.message);
